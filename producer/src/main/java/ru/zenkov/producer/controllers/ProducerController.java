@@ -17,19 +17,18 @@ import java.util.Calendar;
 @RequestMapping("/activeMq")
 public class ProducerController {
 
-    private JmsTemplate JmsTemplate;
+    private final JmsTemplate jmsTemplate;
 
     @GetMapping("/send/{message}")
     public ResponseEntity<String> sendMessage(@PathVariable String message) {
-        JmsTemplate.convertAndSend("TestQueue", message);
+        jmsTemplate.convertAndSend("TestQueue", message);
         return new ResponseEntity<>(String.format("Сообщение \"%s\" отправленно в %s",
                 message,
                 new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime())),
                 HttpStatus.OK);
     }
 
-    @Autowired
-    public void setJmsTemplate(JmsTemplate jmsTemplate) {
-        JmsTemplate = jmsTemplate;
+    public ProducerController(JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
     }
 }

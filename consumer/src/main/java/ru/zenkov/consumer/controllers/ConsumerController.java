@@ -10,7 +10,7 @@ import ru.zenkov.consumer.models.MessagesModel;
 @Controller
 public class ConsumerController {
 
-    private MessagesModel messagesModel;
+    private final MessagesModel messagesModel;
 
     @GetMapping("/get-messages")
     public String getMessages(Model model) {
@@ -18,8 +18,7 @@ public class ConsumerController {
         return "message_page";
     }
 
-    @Autowired
-    public void setMessagesModel(MessagesModel messagesModel) {
+    public ConsumerController(MessagesModel messagesModel) {
         this.messagesModel = messagesModel;
     }
 }

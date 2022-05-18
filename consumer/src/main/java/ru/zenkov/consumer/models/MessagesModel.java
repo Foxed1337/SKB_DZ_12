@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class MessagesModel {
 
-    private List<String> messages = new ArrayList<>();
+    private final List<String> messages = new ArrayList<>();
 
     public void addMessage(String message) {
         messages.add(String.format("Сообщение получено в %s - <%s>",
